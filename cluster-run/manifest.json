@@ -1,0 +1,48 @@
+{
+  "pipeline": {
+    "name": "variant-call",
+    "version": "1.0.0",
+    "implementation": "slurm",
+    "git_sha": "3087d129a53983a81667b56e7775df24efb0e3eb",
+    "run_id": "2026-10-02T10:20:43Z-3087d12",
+    "started_at": "2026-10-02T10:20:43Z",
+    "finished_at": "2026-10-02T10:28:21Z",
+    "exit_status": "success"
+  },
+  "platform": {
+    "kind": "slurm",
+    "region": "chr20:1-10000000",
+    "host": "c3014",
+    "slurm_job_id": "10757852",
+    "slurm_cpus": "2",
+    "container": "none"
+  },
+  "reference": {"genome": "/courses/BINF6610.202710/data/refs/grch38-1000g/GRCh38_full_analysis_set_plus_decoy_hla.fa"},
+  "samples": [
+    {"sample_id": "NA12878", "library_type": "paired", "condition": "affected"},
+    {"sample_id": "NA12891", "library_type": "paired", "condition": "affected"},
+    {"sample_id": "NA12892", "library_type": "single", "condition": "unaffected"},
+    {"sample_id": "NA07357", "library_type": "paired", "condition": "unaffected"},
+    {"sample_id": "NA12003", "library_type": "single", "condition": "affected"},
+    {"sample_id": "NA10851", "library_type": "paired", "condition": "unaffected"},
+    {"sample_id": "NA12813", "library_type": "paired", "condition": "affected"},
+    {"sample_id": "NA12873", "library_type": "paired", "condition": "unaffected"}
+  ],
+  "outputs": [
+    {"stage": "analyze", "type": "vcf", "path": "cohort.filtered.vcf.gz", "checksum": "sha256:3a14652e56d6b8d2c0061214d4f9bcb845d1c7e785574f6d3b1229fb4dcdb0e7"},
+    {"stage": "analyze", "type": "vcf_index", "path": "cohort.filtered.vcf.gz.tbi", "checksum": "sha256:e865ecb7d07bf0d3c9ac467317d0336c1e35c00844937de23ac31f1af545251d"},
+    {"stage": "qc_report", "type": "multiqc", "path": "multiqc_report.html", "checksum": "sha256:0c36e1bc999f5bba9b5a5652862267efbd1b499010edd9670263e5bbfcd7c9e8"}
+  ],
+  "metrics": [],
+  "tools": {
+    "bwa": "0.7.19-r1273",
+    "samtools": "1.24",
+    "bcftools": "1.24",
+    "gatk": "4.6.2.0",
+    "fastqc": "0.12.1",
+    "fastp": "1.3.7",
+    "multiqc": "1.35",
+    "hisat2": "2.2.3",
+    "featureCounts": "2.1.1"
+  }
+}
