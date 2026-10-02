@@ -85,3 +85,49 @@
   replaced with no corruption or special handling. This only works because
   the pipeline has no resume/skip-if-exists logic; adding one later without
   care could mistake a stale partial file for finished output.
+
+
+# Week 3 — Containers
+
+## Failure 1: unpinned rebuild, FROM ubuntu with no tag (deliberate)
+- Trigger: built FROM ubuntu (no tag) with apt-get install curl, rebuilt
+  ~29 min later with docker build --pull --no-cache (the assignment's
+  deadline didn't allow the suggested full day).
+- Build 1: 118 packages. Build 2: 122 packages. diff shows every package
+  differs - not version bumps, but a different Ubuntu release entirely
+  (base-files 13ubuntu10.3 -> 14ubuntu6.2, libc6 2.39 -> 2.43, a new
+  rust-coreutils package appeared).
+- What this shows: ubuntu:latest is not stable even over 30 minutes - it's
+  whatever the registry currently points to. An unpinned FROM can hand
+  back a different OS entirely, with no warning.
+
+## Failure 2: missing --bind (deliberate)
+- Trigger: removed --bind /courses/BINF6610.202710,/scratch/${USER} from
+  01_persample.sbatch, ran --array=1.
+- sacct: FAILED, 00:00:07, exit 1:0. Output: "mkdir: cannot create
+  directory '/scratch': Read-only file system."
+- Where it stopped: before stage 0 ran - the pipeline's first action,
+  mkdir -p "$OUTDIR" under /scratch, failed immediately since /scratch
+  isn't visible at all inside the container without --bind.
+- Fix: restored --bind.
+
+## Failure 3: missing --env THREADS (deliberate)
+- Trigger: removed --env THREADS="${THREADS}" from 01_persample.sbatch
+  (job requested --cpus-per-task=16), ran --array=1.
+- sacct: COMPLETED, 00:08:27, exit 0:0 - no failure at all.
+- Evidence: align/NA12878.bwa.log's [main] CMD: line shows
+  "bwa mem -t 4 ...", the pipeline's own default, not the 16 cores held.
+- What this shows: this is the failure that stops nothing - the job
+  succeeds, using a quarter of its allocated cores, with no error
+  anywhere except the thread count buried in a log file.
+- Fix: restored --env THREADS.
+
+## Failure 4: arm64 image on Explorer (deliberate)
+- Trigger: apptainer pull --arch arm64 arm.sif docker://ubuntu:24.04,
+  then apptainer exec arm.sif echo "test".
+- The pull succeeded completely, no warning. The run failed immediately:
+  "FATAL: ... the image's architecture (arm64) could not run on the
+  host's (amd64)".
+- What this shows: an architecture mismatch is invisible at pull time and
+  only surfaces when the image is actually run - why --platform
+  linux/amd64 must be set and verified on every build, not assumed.
