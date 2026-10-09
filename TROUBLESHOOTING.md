@@ -160,6 +160,10 @@
 - Trigger: in modules/joint_genotype.nf, changed "\$f" to "$f", ran the
   smoke pipeline.
 - Result: compilation failed before any task ran: "f is not defined".
+  Because this failed at compile time, no task folder was ever created -
+  there was no .command.sh, .command.err, or .command.run to inspect,
+  unlike a failure that happens once bash actually starts running inside
+  a task.
 - What this shows: $name without a backslash is read as a Nextflow
   variable, resolved before any bash runs - not left for the shell. No
   such Nextflow variable existed, so the whole run failed immediately.
