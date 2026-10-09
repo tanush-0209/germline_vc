@@ -1,1 +1,6 @@
 slurm/logs/
+work/
+.nextflow/
+.nextflow.log*
+results/
+nf-head-*.out
