@@ -131,3 +131,36 @@
 - What this shows: an architecture mismatch is invisible at pull time and
   only surfaces when the image is actually run - why --platform
   linux/amd64 must be set and verified on every build, not assumed.
+
+
+# Week 4 — Nextflow
+
+## Failure 1: Ctrl-C mid-run, then -resume (deliberate)
+- Trigger: ran the smoke pipeline, let it get partway, then Ctrl-C'd it.
+- Killed run: VALIDATE done; FASTQC 2 of 3; FASTP 1 of 3; Nextflow logged
+  "Killing running tasks (1)".
+- Resumed (-resume): those same tasks showed cached:, everything downstream
+  ran fresh. Final: Succeeded: 16, Cached: 4.
+- What this shows: -resume caches per-task, not per-sample - a sample
+  half-finished across two stages only reruns the stage that didn't finish.
+
+## Failure 2: reference as a queue channel, BWA_MEM only (deliberate)
+- Trigger: changed BWA_MEM's ref input to channel.fromPath(params.ref)
+  instead of ref (a value channel), ran the smoke pipeline.
+- Result: BWA_MEM ran "1 of 1", not 3 of 3 - the queue channel's one item
+  was consumed by the first sample. Every downstream stage still reported
+  100% success, no error anywhere.
+- Evidence: the resulting VCF's #CHROM line showed only smoke_03 -
+  smoke_01 and smoke_02 never made it into the cohort at all.
+- What this shows: this produces a complete, successful-looking run on a
+  silently truncated cohort - zero errors to flag it.
+- Fix: reverted to the value channel, ref.
+
+## Failure 3: missing backslash on \$(...) in a script block (deliberate)
+- Trigger: in modules/joint_genotype.nf, changed "\$f" to "$f", ran the
+  smoke pipeline.
+- Result: compilation failed before any task ran: "f is not defined".
+- What this shows: $name without a backslash is read as a Nextflow
+  variable, resolved before any bash runs - not left for the shell. No
+  such Nextflow variable existed, so the whole run failed immediately.
+- Fix: restored the backslash.

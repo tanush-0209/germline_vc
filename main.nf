@@ -37,7 +37,7 @@ workflow {
 
     FASTQC(ch_checked)
     FASTP(ch_checked)
-    BWA_MEM(FASTP.out.reads, ref, ref_index)
+    BWA_MEM(FASTP.out.reads, ref, ref_index)    
     MARKDUPLICATES(BWA_MEM.out)
     HAPLOTYPECALLER(MARKDUPLICATES.out.bam, ref, ref_index, ref_dict)
 
