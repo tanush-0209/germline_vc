@@ -164,3 +164,18 @@
   variable, resolved before any bash runs - not left for the shell. No
   such Nextflow variable existed, so the whole run failed immediately.
 - Fix: restored the backslash.
+
+## Failure 4: time = '2m' for HAPLOTYPECALLER on a fresh Explorer run (deliberate)
+- Trigger: set HAPLOTYPECALLER's own time = '2m' in the explorer profile,
+  pointed the head job at a fresh --outdir with no -resume, submitted.
+- Nextflow: "Process `HAPLOTYPECALLER (NA12873)` terminated with an error
+  exit status (140)" - a kill signal, not a plain timeout. GATK's own
+  progress meter showed real work interrupted mid-run.
+- sacct: 5 HAPLOTYPECALLER jobs FAILED (ExitCode 12:0, elapsed just under
+  2m), 2 CANCELLED+ (hadn't started when the run stopped). No job shows
+  State=TIMEOUT.
+- What this shows: Nextflow asks Slurm to warn it 30s before a job's time
+  limit and stops the task itself on that warning - so sacct never shows
+  TIMEOUT here, only a kill-signal exit status. Reading only for "TIMEOUT"
+  would miss this failure entirely.
+- Fix: reverted HAPLOTYPECALLER's time to 1h, and the outdir/-resume flags.
