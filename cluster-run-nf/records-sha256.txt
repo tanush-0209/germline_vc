@@ -1,0 +1,3 @@
+abec74fcf9e45cc538fdf5965fdbcb47dfc81d7c49f97c2d139e547d8f8e3158  -
+44f024954abc93339b3791cf7398aca936b22dc0d7578be08f527c3b7b0842fe  -
+They differ because this week's BWA_MEM ran with cpus=8 (set in nextflow.config's explorer profile), while week 3 used --cpus-per-task=16; bwa mem's read-batching depends on thread count, so a few reads align differently between the two runs.
