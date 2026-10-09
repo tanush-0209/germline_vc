@@ -1,0 +1,46 @@
+task_id	name	status	exit	container	native_id	realtime	%cpu	peak_rss
+1	VALIDATE	CACHED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-coreutils_gawk_gzip-7c58ccc2f9ca6bcc.img	10943689	44s	73.3%	8.9 MB
+5	FASTP (NA12878)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943741	24.9s	94.9%	1.1 GB
+6	FASTP (NA12891)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943740	25.1s	94.3%	1.1 GB
+9	FASTP (NA12003)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943745	29.2s	96.0%	1.3 GB
+8	FASTP (NA07357)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943744	23.6s	94.4%	1.1 GB
+10	FASTP (NA10851)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943746	25.9s	94.5%	1.1 GB
+12	FASTP (NA12873)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943748	31.2s	95.2%	1.1 GB
+7	FASTP (NA12892)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943742	31.9s	96.0%	1.3 GB
+3	FASTQC (NA12891)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943755	29s	87.9%	557.6 MB
+2	FASTQC (NA12878)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943757	30s	85.8%	592.4 MB
+4	FASTQC (NA12892)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943760	18s	79.5%	428.4 MB
+16	FASTQC (NA12003)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943769	19s	81.1%	423.6 MB
+17	FASTQC (NA10851)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943764	29s	91.6%	571.5 MB
+15	FASTQC (NA07357)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943762	27s	89.1%	541 MB
+11	FASTP (NA12813)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-fastp-1.3.7--075357a9d5c82494.img	10943747	42.9s	94.2%	1.1 GB
+19	FASTQC (NA12873)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943777	36s	89.9%	597.8 MB
+18	FASTQC (NA12813)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-fastqc-0.12.1--hdfd78af_0.img	10943775	44s	92.0%	610 MB
+20	BWA_MEM (NA12003)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943785	47.9s	705.0%	6.4 GB
+24	BWA_MEM (NA12892)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943789	38.6s	722.1%	6.4 GB
+21	BWA_MEM (NA07357)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943786	1m 30s	742.0%	6.8 GB
+14	BWA_MEM (NA12878)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943784	1m 43s	711.1%	6.8 GB
+22	BWA_MEM (NA10851)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943787	1m 51s	738.3%	6.8 GB
+23	BWA_MEM (NA12873)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943788	1m 50s	749.0%	7 GB
+13	BWA_MEM (NA12891)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943782	1m 48s	699.5%	6.8 GB
+25	BWA_MEM (NA12813)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-bwa_samtools-22527ddb3cc80fb3.img	10943802	3m 2s	731.9%	7.5 GB
+26	MARKDUPLICATES (NA12003)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943962	22.9s	138.8%	11.7 GB
+27	MARKDUPLICATES (NA12892)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943964	21.7s	141.8%	11.8 GB
+29	MARKDUPLICATES (NA12878)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943966	33.3s	139.1%	13.2 GB
+28	MARKDUPLICATES (NA07357)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943967	30.6s	143.1%	11.8 GB
+31	MARKDUPLICATES (NA12873)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943969	37.3s	141.2%	12.3 GB
+30	MARKDUPLICATES (NA10851)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943968	32.8s	138.9%	13 GB
+32	MARKDUPLICATES (NA12891)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943970	34.1s	134.7%	12.5 GB
+33	MARKDUPLICATES (NA12813)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943973	45.3s	137.6%	13.3 GB
+42	MULTIQC	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/quay.io-biocontainers-multiqc-1.35--pyhdfd78af_2.img	10944092	9.7s	41.8%	191.4 MB
+34	HAPLOTYPECALLER (NA12003)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943984	3m 26s	211.2%	1.7 GB
+35	HAPLOTYPECALLER (NA12892)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943989	3m 26s	217.0%	1.7 GB
+36	HAPLOTYPECALLER (NA12878)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943987	4m 37s	199.6%	1.2 GB
+37	HAPLOTYPECALLER (NA07357)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943991	4m 27s	201.7%	1.2 GB
+39	HAPLOTYPECALLER (NA10851)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943996	4m 37s	196.2%	1.2 GB
+40	HAPLOTYPECALLER (NA12891)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943997	5m 1s	198.8%	1.2 GB
+38	HAPLOTYPECALLER (NA12873)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10943994	5m 36s	189.0%	1.2 GB
+41	HAPLOTYPECALLER (NA12813)	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10944000	6m 50s	189.6%	1.1 GB
+43	JOINT_GENOTYPE	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10944246	6m 36s	105.7%	1.9 GB
+44	FILTER	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-gatk4_samtools_bcftools-1adede7d418fb46b.img	10944644	6.6s	140.0%	519.4 MB
+45	PUBLISH	COMPLETED	0	/scratch/parasamharish.t/nxf-apptainer/community.wave.seqera.io-library-coreutils_gawk_gzip-7c58ccc2f9ca6bcc.img	10944696	3.7s	3.2%	7.1 MB
