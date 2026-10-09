@@ -11,22 +11,22 @@ include { FILTER }           from './modules/filter'
 include { MULTIQC }          from './modules/multiqc'
 include { PUBLISH }          from './modules/publish'
 
-sheet = file(params.samplesheet)
-ch_samples = channel.fromPath(sheet)
-    .splitCsv(header: true)
-    .map { row ->
-        def meta = [id: row.sample_id, single_end: row.library_type == 'single']
-        def r1 = sheet.parent.resolve(row.r1_fastq)
-        def reads = meta.single_end ? [r1] : [r1, sheet.parent.resolve(row.r2_fastq)]
-        [meta, reads]
-    }
-
-ref       = file(params.ref)
-ref_index = files("${params.ref}.*")
-ref_dict  = file("${ref.parent}/${ref.baseName}.dict")
-
 workflow {
     main:
+
+    sheet = file(params.samplesheet)
+    ch_samples = channel.fromPath(sheet)
+        .splitCsv(header: true)
+        .map { row ->
+            def meta = [id: row.sample_id, single_end: row.library_type == 'single']
+            def r1 = sheet.parent.resolve(row.r1_fastq)
+            def reads = meta.single_end ? [r1] : [r1, sheet.parent.resolve(row.r2_fastq)]
+            [meta, reads]
+        }
+
+    ref       = file(params.ref)
+    ref_index = files("${params.ref}.*")
+    ref_dict  = file("${ref.parent}/${ref.baseName}.dict")
 
     VALIDATE(sheet, ch_samples.map { _meta, reads -> reads }.collect(),
              ref, ref_index, ref_dict)
