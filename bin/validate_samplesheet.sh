@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-SHEET=${1:?usage: validate_samplesheet.sh <samplesheet>}
+SHEET=${1:?usage: validate_samplesheet.sh <samplesheet> <ref>}
+SHEET_DIR=$(dirname "$SHEET")
+
+resolve() {
+    local p="$1"
+    if [[ "$p" = /* ]]; then
+        echo "$p"
+    else
+        echo "${SHEET_DIR}/${p}"
+    fi
+}
 
 IFS=',' read -r -a HEADER < "$SHEET"
 field_index() {
@@ -27,12 +37,12 @@ while IFS=',' read -r -a fields; do
     r2_fastq="${fields[$idx_r2]:-}"
     sample_ids+=("$sample_id")
 
-    r1_base=$(basename "$r1_fastq")
-    if [[ ! -f "$r1_base" ]]; then
-        echo "ERROR: ${sample_id}: r1_fastq not found: ${r1_base}" >&2
+    r1_path=$(resolve "$r1_fastq")
+    if [[ ! -f "$r1_path" ]]; then
+        echo "ERROR: ${sample_id}: r1_fastq not found: ${r1_path}" >&2
         problems=$(( problems + 1 ))
-    elif ! gzip -t "$r1_base" 2>/dev/null; then
-        echo "ERROR: ${sample_id}: r1_fastq is truncated or not valid gzip: ${r1_base}" >&2
+    elif ! gzip -t "$r1_path" 2>/dev/null; then
+        echo "ERROR: ${sample_id}: r1_fastq is truncated or not valid gzip: ${r1_path}" >&2
         problems=$(( problems + 1 ))
     fi
 
@@ -41,12 +51,12 @@ while IFS=',' read -r -a fields; do
             echo "ERROR: ${sample_id}: library_type is paired but r2_fastq is empty" >&2
             problems=$(( problems + 1 ))
         else
-            r2_base=$(basename "$r2_fastq")
-            if [[ ! -f "$r2_base" ]]; then
-                echo "ERROR: ${sample_id}: r2_fastq not found: ${r2_base}" >&2
+            r2_path=$(resolve "$r2_fastq")
+            if [[ ! -f "$r2_path" ]]; then
+                echo "ERROR: ${sample_id}: r2_fastq not found: ${r2_path}" >&2
                 problems=$(( problems + 1 ))
-            elif ! gzip -t "$r2_base" 2>/dev/null; then
-                echo "ERROR: ${sample_id}: r2_fastq is truncated or not valid gzip: ${r2_base}" >&2
+            elif ! gzip -t "$r2_path" 2>/dev/null; then
+                echo "ERROR: ${sample_id}: r2_fastq is truncated or not valid gzip: ${r2_path}" >&2
                 problems=$(( problems + 1 ))
             fi
         fi

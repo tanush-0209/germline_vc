@@ -1,0 +1,4 @@
+Sample	command
+smoke_01_R1	fastp -i /home/tanush/smoke/smoke_01_R1.fastq.gz -I /home/tanush/smoke/smoke_01_R2.fastq.gz -o work/trim/smoke_01_R1.trim.fastq.gz -O work/trim/smoke_01_R2.trim.fastq.gz -j work/trim/smoke_01.fastp.json -h work/trim/smoke_01.fastp.html 
+smoke_02_R1	fastp -i /home/tanush/smoke/smoke_02_R1.fastq.gz -I /home/tanush/smoke/smoke_02_R2.fastq.gz -o work/trim/smoke_02_R1.trim.fastq.gz -O work/trim/smoke_02_R2.trim.fastq.gz -j work/trim/smoke_02.fastp.json -h work/trim/smoke_02.fastp.html 
+smoke_03_R1	fastp -i /home/tanush/smoke/smoke_03_R1.fastq.gz -o work/trim/smoke_03_R1.trim.fastq.gz -j work/trim/smoke_03.fastp.json -h work/trim/smoke_03.fastp.html 

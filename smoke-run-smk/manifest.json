@@ -1,0 +1,40 @@
+{
+  "pipeline": {
+    "name": "variant-call",
+    "version": "1.0.0",
+    "implementation": "snakemake",
+    "revision": "none",
+    "git_sha": "none",
+    "run_id": "snakemake-20261017T054732",
+    "started_at": "2026-10-17T05:47:32.276280+05:30",
+    "launch_dir": "/home/tanush/germline_vc",
+    "finished_at": "2026-10-17T00:18:57Z",
+    "exit_status": "success"
+  },
+  "params": {
+    "platform": "laptop",
+    "executor": "local",
+    "samplesheet": "/home/tanush/smoke/samplesheet.csv",
+    "ref": "/home/tanush/smoke/smoke.fa",
+    "region": "smoke_1mb",
+    "outdir": "results"
+  },
+  "platform": {
+    "kind": "laptop",
+    "executor": "local",
+    "engine": "snakemake 9.27.0",
+    "containers": {}
+  },
+  "samples": [
+    {"sample_id": "smoke_01", "library_type": "paired", "condition": "unaffected"},
+    {"sample_id": "smoke_02", "library_type": "paired", "condition": "affected"},
+    {"sample_id": "smoke_03", "library_type": "single", "condition": "affected"}
+  ],
+  "outputs": [
+    {"path": "cohort.filtered.vcf.gz", "checksum": "sha256:2b7cda28d00ec19f8a9f6683806b14c3ef7ea9c078220d7093b74770de143ad5"},
+    {"path": "cohort.filtered.vcf.gz.tbi", "checksum": "sha256:2a02e94e585ead80dc98b93a09f75fa17732b5d4cdaf342da3ff533f59cb0811"},
+    {"path": "multiqc_report.html", "checksum": "sha256:f024cd4e8520d660d3198dbd7fb8ab3faab00da8932f6597436e448148b0ceed"},
+    {"path": "samples.tsv", "checksum": "sha256:d534edf8132cce4c541af0eea6cc345b17613e1b4a7a5286742aa8d16395257c"},
+    {"path": "variants.tsv", "checksum": "sha256:d1d479a13caabc6efd201754d83ec980e2c7a279c6a90900d61a31d369cd48c9"}
+  ]
+}
