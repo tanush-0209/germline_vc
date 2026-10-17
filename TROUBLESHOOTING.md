@@ -228,3 +228,32 @@
   exactly one of the two fastp rules - without it, every sample is
   ambiguous between them, not just single-end or paired ones specifically.
 - Fix: restored both wildcard_constraints: blocks.
+
+## Failure 4: software-deployment-method: apptainer removed, first Explorer run (deliberate)
+- Trigger: removed software-deployment-method: apptainer from
+  profiles/explorer/profile.yaml, submitted a fresh Explorer run
+  (--outdir results-f4, nothing cached for this directory).
+- Which rule failed: fastqc (sample NA12813) and fastp_single (samples
+  NA12003, NA12892) all failed within the first few minutes - validate
+  itself succeeded, since it's plain bash with no real dependency on
+  the container.
+- Exit status: 127 ("command not found"). The head job's own log only
+  said "SLURM-job '11151226' failed, SLURM status is: 'FAILED'. Reason:
+  Unknown" - the real cause was in the job's own Slurm log,
+  .snakemake/slurm_logs/rule_fastqc/NA12813/11151226.log, which showed
+  "returned non-zero exit status 127".
+- The rule's own log (logs/fastqc/NA12813.log): "fastqc: command not
+  found" - without --sdm apptainer, container: lines are ignored and
+  the bare command runs directly on the compute node, where fastqc was
+  never installed.
+- After restoring the line and rerunning: validate, which had already
+  finished successfully, reran anyway. snakemake -n gave the reason
+  "Software environment definition has changed since last execution" -
+  Snakemake tracks the deployment method itself as part of a rule's
+  provenance, so toggling it off and back on counts as a change, even
+  though validate's actual command never changed.
+- What this shows: a missing --sdm/software-deployment-method setting
+  fails loudly and immediately for any rule that genuinely needs a tool
+  only present in the image - but the failure message you see first
+  (Slurm's own "FAILED, Reason: Unknown") hides the real cause, which
+  only shows up in the rule's own per-job log.
