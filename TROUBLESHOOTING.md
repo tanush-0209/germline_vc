@@ -183,3 +183,48 @@
   TIMEOUT here, only a kill-signal exit status. Reading only for "TIMEOUT"
   would miss this failure entirely.
 - Fix: reverted HAPLOTYPECALLER's time to 1h, and the outdir/-resume flags.
+
+# Week 5 — Snakemake
+
+## Failure 1: Ctrl-C mid-run, then rerun (deliberate)
+- Trigger: ran the full smoke pipeline from scratch, let it reach the middle of
+  the filter rule, then Ctrl-C'd it.
+- Snakemake: "Terminating processes on user request, this might take some
+  time." filter's shell command exited non-zero (killed mid-write), leaving
+  results/cohort.filtered.vcf.gz marked incomplete.
+- Rerunning the same command without any extra flag: IncompleteFilesException,
+  naming results/cohort.filtered.vcf.gz specifically, and telling me to add
+  --rerun-incomplete.
+- Rerunning with --rerun-incomplete: only filter reran ("reason: Forced
+  execution") - every other job (validate through joint_genotype, multiqc)
+  stayed cached, since the interrupt only touched filter's in-progress output.
+  publish and all then ran fresh since their inputs had changed. 3 of 3 steps,
+  not the full 21.
+- What this shows: Snakemake's incomplete-file tracking is specific to the
+  one file that was actually being written when the interrupt hit, not a
+  blanket rollback - everything upstream of the interrupted job is still
+  trusted and reused.
+
+## Failure 2: log: missing {sample}, stage-3 rule (deliberate)
+- Trigger: changed bwa_mem's log: from "logs/bwa_mem/{sample}.log" to
+  "logs/bwa_mem.log" (dropping the wildcard), ran snakemake -n.
+- RuleException: "Not all output, log and benchmark files of rule bwa_mem
+  contain the same wildcards. This is crucial though, in order to avoid
+  that two or more jobs write to the same file."
+- What this shows: Snakemake requires output:, log: and benchmark: to share
+  exactly the same wildcards - without that, the three bwa_mem jobs (one per
+  sample) would all try to write to the same single log file, clobbering
+  each other's output silently.
+- Fix: restored "logs/bwa_mem/{sample}.log".
+
+## Failure 3: both wildcard_constraints removed, stage-2 rules (deliberate)
+- Trigger: removed wildcard_constraints: sample=one_of(PAIRED)/one_of(SINGLE)
+  from fastp_paired and fastp_single, ran snakemake -n.
+- AmbiguousRuleException: "Rules fastp_single and fastp_paired are ambiguous
+  for the file work/trim/smoke_01_R1.trim.fastq.gz." - named both rules and
+  the exact file (a paired sample, smoke_01), showing both rules' output
+  patterns now matched it identically with no way to pick one.
+- What this shows: wildcard_constraints is what makes each sample match
+  exactly one of the two fastp rules - without it, every sample is
+  ambiguous between them, not just single-end or paired ones specifically.
+- Fix: restored both wildcard_constraints: blocks.
