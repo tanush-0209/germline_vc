@@ -20,3 +20,6 @@ have moved the pinned tool versions forward in a way the Dockerfile's
 `=version` pins do not fully protect against for their own transitive
 dependencies (as section 3 of the demo measured: pinning samtools=1.21 still
 let htslib drift between builds two weeks apart).
+
+## The image in ECR
+<account>.dkr.ecr.us-east-2.amazonaws.com/variant-call@sha256:e7d51cd15b3f0a7c250096546aa0916401e7c742be70041063f626b8c88f5534
