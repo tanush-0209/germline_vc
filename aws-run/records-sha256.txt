@@ -1,0 +1,3 @@
+a737ea1f6f85f9c84b9f97c048bd26263b7404e802613e79730e7bef8a58eb7a  -
+41e7c5b336bbcd858f05f4766b834d6d236372e7519fe8a9e9293f9e5ed8a5db  -
+They differ because the laptop run (week 1) used whatever bwa/samtools/gatk/bcftools versions were installed via apt/Homebrew at the time, while the AWS Batch run used the exact pinned versions from containers/Dockerfile (bwa=0.7.19, samtools=1.24, bcftools=1.24, gatk4=4.6.2.0).
